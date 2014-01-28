@@ -88,24 +88,24 @@ int main(int argc, char **argv)
 
   in_buff = (struct IN_BUFF *)malloc(sizeof(struct IN_BUFF));
   if (in_buff == NULL) {
-    logprint(LOG_ERROR, "Couln't allocate memory in main()\n");
+    logprint(LOG_ERROR, "Couldn't allocate memory in main()\n");
   }
 
   in_buff->url = (char *)malloc(MAX_BUFF);
   if (in_buff->url == NULL) {
-    logprint(LOG_ERROR, "Couln't allocate memory in main()\n");
+    logprint(LOG_ERROR, "Couldn't allocate memory in main()\n");
   }
   in_buff->src_address = (char *)malloc(MAX_BUFF);
   if (in_buff->src_address == NULL) {
-    logprint(LOG_ERROR, "Couln't allocate memory in main()\n");
+    logprint(LOG_ERROR, "Couldn't allocate memory in main()\n");
   }
   in_buff->ident = (char *)malloc(MAX_BUFF);
   if (in_buff->ident == NULL) {
-    logprint(LOG_ERROR, "Couln't allocate memory in main()\n");
+    logprint(LOG_ERROR, "Couldn't allocate memory in main()\n");
   }
   in_buff->method = (char *)malloc(MAX_BUFF);
   if (in_buff->method == NULL) {
-    logprint(LOG_ERROR, "Couln't allocate memory in main()\n");
+    logprint(LOG_ERROR, "Couldn't allocate memory in main()\n");
   }
 
   /* go into interactive mode if we're run as root */
@@ -248,14 +248,3 @@ int main(int argc, char **argv)
 
   return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
