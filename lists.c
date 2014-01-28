@@ -183,7 +183,7 @@ int add_pattern_file(char *conf_filename, struct subnet_block *block,
   (*curr)->methods = methods;
 
 #ifdef DEBUG
-  logprint(LOG_DEBUG, "inserted patttern file %s, with accept %d\n", conf_filename, methods);
+  logprint(LOG_DEBUG, "inserted pattern file %s, with accept %d\n", conf_filename, methods);
 #endif
   
   return 1;
