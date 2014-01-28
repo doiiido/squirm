@@ -1,16 +1,19 @@
 # $Id: Makefile,v 1.2 2005/08/19 07:31:06 chris Exp $
 
 # The path to install squirm under
-PREFIX=/usr/local/squirm
+BINDIR=/usr/bin
+LOGDIR=/var/log/squid
+ETCDIR=/etc/squid
+DESTDIR=
 
 # The username that squid runs as (see cache_effective_user in squid.conf)
-USER=squid    
+USER=proxy
 
 # The group that squid runs as (see cache_effective_group in squid.conf)
-GROUP=squid
+GROUP=daemon
 
 # The group that the root user belongs to
-ROOT_GROUP = bin
+ROOT_GROUP = root
 
 # The regex library (-lgnuregex is common on FreeBSD, none for some Linux'es)
 EXTRALIBS=
@@ -32,20 +35,18 @@ CC=gcc
 OPTIMISATION=-O3
 BINARIES = squirm
 
-CFLAGS = -O3 -Wall -funroll-loops -DPREFIX=\"$(PREFIX)\"
+CFLAGS = -O3 -Wall -funroll-loops -DBINDIR=\"$(BINDIR)\" -DLOGDIR=\"$(LOGDIR)\" -DETCDIR=\"$(ETCDIR)\"
 #CFLAGS = -Wall -g -DPREFIX=\"$(PREFIX)\"
 #CFLAGS = -Wall -g -DDEBUG
 
 all:	$(BINARIES)
 
 install:	all
-			install -m 755 -o root -g $(ROOT_GROUP) -d $(PREFIX) \
-			$(PREFIX)/bin
-			install -m 770 -o root -g $(GROUP) -d $(PREFIX)/etc
-			install -m 750 -o $(USER) -g $(GROUP) -d $(PREFIX)/logs
-			install -m 660 -c -o root -g $(GROUP) squirm.conf.dist squirm.patterns.dist \
-			$(PREFIX)/etc
-			install -m 755 -o root -g $(ROOT_GROUP) --strip squirm $(PREFIX)/bin
+	mkdir -p $(DESTDIR)$(BINDIR)
+	mkdir -p $(DESTDIR)$(ETCDIR)
+	mkdir -p $(DESTDIR)$(LOGDIR)
+	install -m 644 -c squirm.conf.dist squirm.patterns.dist $(DESTDIR)$(ETCDIR)
+	install -m 755 -o root -g $(ROOT_GROUP) --strip squirm $(DESTDIR)$(BINDIR)
 
 squirm.o:	squirm.c $(HFILES)
 			$(CC) -c squirm.c 	$(CFLAGS)

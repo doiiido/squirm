@@ -37,14 +37,14 @@
 
 /*************  Log File Locations (must be writable by **********/
 /*************  the user given in the squid.conf file   **********/
-#define LOG_MATCH PREFIX"/logs/squirm.match"
-#define LOG_FAIL  PREFIX"/logs/squirm.fail"
-#define LOG_ERROR PREFIX"/logs/squirm.error"
-#define LOG_WHERE PREFIX"/logs/squirm.where"
-#define LOG_DEBUG PREFIX"/logs/squirm.debug"
-#define LOG_INFO  PREFIX"/logs/squirm.info"
+#define LOG_MATCH LOGDIR"/squirm.match"
+#define LOG_FAIL  LOGDIR"/squirm.fail"
+#define LOG_ERROR LOGDIR"/squirm.error"
+#define LOG_WHERE LOGDIR"/squirm.where"
+#define LOG_DEBUG LOGDIR"/squirm.debug"
+#define LOG_INFO  LOGDIR"/squirm.info"
 
 /*************  Configuration file locations  ***********/
-#define SQUIRM_CONF PREFIX"/etc/squirm.conf"
+#define SQUIRM_CONF ETCDIR"/squirm.conf"
 
 #endif

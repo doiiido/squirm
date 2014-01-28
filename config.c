@@ -99,27 +99,11 @@ char *gen_fq_name(char *name, char *dir)
     return result; /* the caller will take care of null return */
   }
 
-  /* we have either a relative, or a plain */
-  if (index(name, '/') != NULL) {
-    /* we found a slash => must be a relative, so append the base to it */
-    result = (char *)malloc(strlen(PREFIX"/") + strlen(name) + 1);
-    if (result == NULL) {
-      return result;
-    }
-    result[0] = '\0';
-    strcpy(result, PREFIX"/");
-    strcat(result, name);
-    return result;
-  }
   /* must be a plain name */
-  result = (char *)malloc(strlen(PREFIX"/") + strlen(dir) + strlen(name) + 1);
-  if (result == NULL) {
-    return result;
+  result = (char *)malloc(strlen(dir) + strlen(name) + 2);
+  if (result) {
+    sprintf(result, "%s/%s", dir, name);
   }
-  result[0] = '\0';
-  strcpy(result, PREFIX"/");
-  strcat(result, dir);
-  strcat(result, name);
   return result;
 }
 
@@ -214,7 +198,7 @@ int parse_squirm_conf(char *filename)
 	  dodo_mode = 1;
 	  return 0;
 	} else {
-	  curr_block->abort_log_name = gen_fq_name(get_stuff_after_keyword(buff), "log/");
+	  curr_block->abort_log_name = gen_fq_name(get_stuff_after_keyword(buff), LOGDIR);
 	  if (curr_block->abort_log_name == NULL) {
 	    logprint(LOG_ERROR, "couldn't allocate memory in parse_squirm_conf()\n");
 	    dodo_mode = 1;
@@ -232,7 +216,7 @@ int parse_squirm_conf(char *filename)
 	  dodo_mode = 1;
 	  return 0;
 	} else {
-	  curr_block->log_name = gen_fq_name(get_stuff_after_keyword(buff), "log/");
+	  curr_block->log_name = gen_fq_name(get_stuff_after_keyword(buff), LOGDIR);
 	  if (curr_block->log_name == NULL) {
 	    logprint(LOG_ERROR, "couldn't allocate memory in parse_squirm_conf()\n");
 	    dodo_mode = 1;
@@ -273,7 +257,7 @@ int parse_squirm_conf(char *filename)
 	    return 0;
 	  }
 
-	  fq_pattern_filename = gen_fq_name(pattern_filename, "etc/");
+	  fq_pattern_filename = gen_fq_name(pattern_filename, ETCDIR);
 	  if (fq_pattern_filename == NULL) {
 	    logprint(LOG_ERROR, "couldn't allocate memory in parse_squirm_conf()\n");
 	    dodo_mode = 1;
