@@ -1,0 +1,29 @@
+# Changelog for Squirm
+# $Id: CHANGELOG,v 1.3 2005/08/21 10:44:05 chris Exp $
+
+2005-08-19: Fixed memory problem in lists.c (was freeing statically
+            allocated structure).
+            Thanks to Phil Kernick for patch.
+
+	    Corrected erroneous email addresses and converted copyright
+	    note to a single author plus contributors in CREDITS.
+
+	    Removed cmalloc, cfree & cstrdup macros.
+
+	    wrote safe_strdup() to return NULL for NULL argument. Replaced
+	    all calls to strdup to safe_strdup.
+
+            Code reformatting and other minor cosmetic chages (deleted
+            old comment-out code and comments).
+
+	    Changed log.c's log() to logprint() and replaced all calls
+            to it.  Modern Linuxes have a log() function which causes compiler
+	    warnings.
+
+2005-08-21: Method strings were being incorrectly compared in config.c 
+	    Thanks to Phil Kernick for patch.
+
+2005-08-21: Fixed references to cfree() which was intended to be a
+            macro that was removed in log.h
+
+

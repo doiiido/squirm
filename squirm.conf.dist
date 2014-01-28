@@ -1,0 +1,42 @@
+# squirm.dist
+#
+# $Id: squirm.conf.dist,v 1.1.1.1 2000/07/30 01:59:00 chris Exp $
+#
+# this file is comprised of a series of blocks,
+# started by 'begin' and closed by 'end'
+#
+# within a block, any number of networks may be specified
+#      network cidr       (ie xxx.xxx.xxx.xxx/xx)
+#
+# any number of pattern files may be specified
+#      pattern pattern-file method1[, method2, ...]
+#          where methods are get,put,post,head,all
+#
+# one log (for loggin matches) may be specified
+#
+# one abort-log may optionally be specified. Most useful aborts will
+# be matched a large number of times, so you normally will not want
+# to use this
+#
+# processing of incoming requests happens in the order that things
+# appear in the file, as with the pattern files.
+
+
+
+begin
+network 10.0.0.0/8
+network 192.168.0.0/24
+#log logs/match.log
+#abort-log logs/abort.log
+pattern squirm.patterns get
+pattern common.patterns all
+end
+
+
+begin
+network 127.0.0.0/24
+log logs/private-match.log
+abort-log logs/private-abort.log
+pattern private.patterns get
+pattern common.pattterns all
+end
