@@ -35,8 +35,8 @@ end
 
 begin
 network 127.0.0.0/24
-log logs/private-match.log
-abort-log logs/private-abort.log
+log private-match.log
+abort-log private-abort.log
 pattern private.patterns get
-pattern common.pattterns all
+pattern common.patterns all
 end
