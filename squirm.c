@@ -62,6 +62,7 @@ extern struct pattern_file *pattern_head;  /* from lists.h */
 int load_in_buff(char *buff, struct IN_BUFF *in_buff)
 {
   int converted;
+  int len;
   char *tmp;
   
   strcpy(in_buff->url, "");
@@ -87,9 +88,9 @@ int load_in_buff(char *buff, struct IN_BUFF *in_buff)
      4 arguments not parsed, in which we just 
      print buff to stdout
   */
-  if(strlen(in_buff->url) <= 4) {
-    logprint(LOG_FAIL, "strlen in_buff->url = [%d] in main()\n", 
-	strlen(in_buff->url));
+  len = strlen(in_buff->url);
+  if(len <= 4) {
+    logprint(LOG_FAIL, "strlen in_buff->url = [%d] in main()\n", len);
     return 1;
   }
 
